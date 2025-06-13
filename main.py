@@ -33,22 +33,13 @@ def send_message():
     chat_display.config(state=tk.DISABLED)
     chat_display.yview(tk.END)
 
-def on_enter(e):
-    send_button.config(bg="#005f99")
-def on_leave(e):
-    send_button.config(bg="#007acc")
-def on_history_enter(e):
-    history_button.config(bg="#1a6d2b")
-def on_history_leave(e):
-    history_button.config(bg="#228B22")
-
 def open_history_window():
     history_window = Toplevel(root)
     history_window.title("Chat History")
     history_window.geometry("1000x700")
     history_window.configure(bg="#f5f7fa")
 
-    header = tk.Label(history_window, text="📜 Chat History", font=("Helvetica", 18, "bold"), bg="#2d2f31", fg="white", pady=10)
+    header = tk.Label(history_window, text="Chat History", font=("Helvetica", 18, "bold"), bg="#2d2f31", fg="white", pady=10)
     header.pack(fill=tk.X)
 
     history_display = scrolledtext.ScrolledText(history_window, wrap=tk.WORD, font=("Segoe UI", 12), bg="white", fg="#333", state=tk.NORMAL)
@@ -74,22 +65,20 @@ def exit_app():
         root.destroy()
 
 root = tk.Tk()
-root.title("Gemini Chat Assistant")
+root.title("Chat Assistant")
 root.geometry("1000x700")
 root.configure(bg="#e9ecf2")
 root.state('zoomed')
 
-# Header
 header_frame = tk.Frame(root, bg="#1e1f22")
 header_frame.pack(fill=tk.X)
 
-header_label = tk.Label(header_frame, text="💬 Gemini Chat Assistant", font=("Helvetica", 22, "bold"), bg="#1e1f22", fg="white", pady=15)
+header_label = tk.Label(header_frame, text="A Simple Chatbot", font=("Helvetica", 22, "bold"), bg="#1e1f22", fg="white", pady=15)
 header_label.pack(side=tk.LEFT, padx=20)
 
-exit_button = tk.Button(header_frame, text="❌ Exit", font=("Arial", 12, "bold"), bg="#aa2e25", fg="white", padx=20, pady=5, command=exit_app, cursor="hand2")
+exit_button = tk.Button(header_frame, text="Exit", font=("Arial", 12, "bold"), bg="#aa2e25", fg="white", padx=20, pady=5, command=exit_app, cursor="hand2")
 exit_button.pack(side=tk.RIGHT, padx=20, pady=10)
 
-# Main Chat Area
 main_frame = tk.Frame(root, bg="#e9ecf2")
 main_frame.pack(fill=tk.BOTH, expand=True, padx=30, pady=20)
 
@@ -107,13 +96,9 @@ user_entry.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 10), ipady=10)
 
 send_button = tk.Button(bottom_frame, text="Send", font=("Segoe UI", 12, "bold"), bg="#007acc", fg="white", padx=20, pady=8, relief=tk.FLAT, command=send_message, cursor="hand2")
 send_button.pack(side=tk.LEFT, padx=(0, 10))
-send_button.bind("<Enter>", on_enter)
-send_button.bind("<Leave>", on_leave)
 
-history_button = tk.Button(bottom_frame, text="📜 History", font=("Segoe UI", 12, "bold"), bg="#228B22", fg="white", padx=20, pady=8, relief=tk.FLAT, command=open_history_window, cursor="hand2")
+history_button = tk.Button(bottom_frame, text="History", font=("Segoe UI", 12, "bold"), bg="#228B22", fg="white", padx=20, pady=8, relief=tk.FLAT, command=open_history_window, cursor="hand2")
 history_button.pack(side=tk.LEFT)
-history_button.bind("<Enter>", on_history_enter)
-history_button.bind("<Leave>", on_history_leave)
 
 root.bind("<Return>", lambda event=None: send_message())
 
